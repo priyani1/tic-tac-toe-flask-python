@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Tic Tac Toe</h1>
+    <form method="POST" action="/">
+        <div class="board">
+            {% for i in range(9) %}
+                <input type="text" name="cell{{ i }}" value="{{ board[i] }}" maxlength="1" class="cell">
+                {% if i % 3 == 2 %}</div><div class="board">{% endif %}
+            {% endfor %}
+        </div>
+        <button type="submit">Make Move</button>
+        <a href="/reset"><button type="button">Reset Game</button></a>
+        <a href="/showDevInfo"><button type = "button">Developer Info</button></a>
+        {% if devInfo.items() !=0 %}
+            {% for key, value in devInfo.items() %}
+                <p>{{key}} : {{value}}</p>
+            {% endfor %}
+        {% endif %}
+    </form>
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+</body>
+</html>
